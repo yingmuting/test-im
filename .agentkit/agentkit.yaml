@@ -61,9 +61,9 @@ envs:
 
 # ── IM channels (optional) ───────────────────────────────
 # Deploys a bot proxy to VeFaaS after the runtime. Credentials via ${VAR}.
-im:
-  region: cn-beijing
-  project: default
+#im:
+#  region: cn-beijing
+#  project: default
 #  feishu:
 #    enabled: true
 #    app_id: ${FEISHU_APP_ID}
