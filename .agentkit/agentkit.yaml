@@ -61,21 +61,13 @@ envs:
 
 # ── IM channels (optional) ───────────────────────────────
 # Deploys a bot proxy to VeFaaS after the runtime. Credentials via ${VAR}.
-#im:
-#  region: cn-beijing
-#  project: default
-#  feishu:
-#    enabled: true
-#    app_id: ${FEISHU_APP_ID}
-#    app_secret: ${FEISHU_APP_SECRET}
-#   wecom:
-#     enabled: true
-#     bot_id: ${WECOM_BOT_ID}
-#     bot_secret: ${WECOM_BOT_SECRET}
-#   dingtalk:
-#     enabled: true
-#     client_id: ${DINGTALK_CLIENT_ID}
-#     client_secret: ${DINGTALK_CLIENT_SECRET}
+im:
+  region: cn-beijing
+  project: default
+  feishu:
+    enabled: true
+    app_id: ${FEISHU_APP_ID}
+    app_secret: ${FEISHU_APP_SECRET}
 
 # ── Frontend BFF (optional) ──────────────────────────────
 # Public VeFaaS front door: OAuth login at the edge, then reverse-proxy to the
@@ -83,12 +75,23 @@ envs:
 # is auto-set to custom_jwt from this userpool. The callback is auto-registered
 # and OAUTH2_REDIRECT_URI auto-derived — you only declare the userpool here.
 frontend:
-  enabled: true
+  enabled: false
   region: cn-beijing
   project: default
-  oauth2:
-    user_pool_id: ${USERPOOL_ID}
-    client_id: ${USERPOOL_CLIENT_ID}
+#   # The frontend function and gateway use this region/project.
+#   # gateway is OPTIONAL. The frontend runs on a serverless APIG gateway; by
+#   # default an existing one is reused. If the account has none, deploy fails —
+#   # create a serverless gateway, or pin one here by name.
+#   # gateway: ${VEFAAS_SERVERLESS_GATEWAY}
+#   oauth2:
+#     # Optional Identity lookup scope. Omit region to search all known regions;
+#     # omit project to search all projects. Multiple matches are rejected.
+#     region: cn-shanghai
+#     project: identity-project
+#     # The client secret is fetched automatically from the userpool; declare only
+#     # the ids. To override, add: client_secret: ${USERPOOL_CLIENT_SECRET}
+#     user_pool_id: ${USERPOOL_ID}
+#     client_id: ${USERPOOL_CLIENT_ID}
 
 # ── Observability (optional) ─────────────────────────────
 # apmplus: true                # enable APMPlus monitoring

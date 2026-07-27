@@ -2,9 +2,8 @@
 
 An **internal employee & IT service-desk** agent ([VeADK](https://github.com/volcengine/veadk-python)),
 scaffolded with `agentkit init`. It runs as the ADK API server and is delivered
-through a **public SSO-login frontend**: `agentkit deploy` builds the runtime and
-a frontend BFF where employees log in via your Volcengine user pool, then chat
-with the agent — their identity is forwarded end-to-end (no shared API key).
+as a **Feishu bot**: `agentkit deploy` builds the runtime and a Feishu proxy that
+bridges the bot to it over WebSocket.
 
 The agent (`assistant/agent.py`) answers from an internal knowledge base and can
 create/track support tickets and check leave balances. Every backend is an
@@ -20,17 +19,16 @@ python main.py              # serves the ADK API on http://0.0.0.0:8000
 
 Probe it: `curl localhost:8000/list-apps`.
 
-## Deploy it (with the SSO frontend)
+## Deploy it (with the Feishu bot)
 
 ```bash
-export USERPOOL_ID=... USERPOOL_CLIENT_ID=...
+export FEISHU_APP_ID=... FEISHU_APP_SECRET=...
 agentkit deploy
 ```
 
-`frontend` is already enabled in `.agentkit/agentkit.yaml`, so `agentkit deploy`
-also ships the public frontend and derives the runtime's `custom_jwt` auth from
-the same user pool — no flags needed. See the docs for preparing the user pool
-and a WEB client.
+`im.feishu` is already enabled in `.agentkit/agentkit.yaml`, so `agentkit deploy`
+also ships the Feishu proxy — no flags needed. See the docs for creating the
+Feishu app and granting bot permissions.
 
 ## Next steps
 
