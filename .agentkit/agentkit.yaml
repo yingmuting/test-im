@@ -64,10 +64,10 @@ envs:
 im:
   region: cn-beijing
   project: default
-    feishu:
-      enabled: true
-      app_id: ${FEISHU_APP_ID}
-      app_secret: ${FEISHU_APP_SECRET}
+  feishu:
+    enabled: true
+    app_id: ${FEISHU_APP_ID}
+    app_secret: ${FEISHU_APP_SECRET}
 #   wecom:
 #     enabled: true
 #     bot_id: ${WECOM_BOT_ID}
